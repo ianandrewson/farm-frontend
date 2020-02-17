@@ -1,4 +1,5 @@
-import { getBarns, FETCH_BARNS_LOADING } from '../actions/barnActions';
+import { FETCH_BARNS_LOADING, FETCH_BARNS } from '../actions/barnActions';
+import reducer from './barnReducers';
 
 describe('barn reducer tests', () => {
   it('can handle the FETCH_BARNS_LOADING action', () => {
@@ -11,7 +12,13 @@ describe('barn reducer tests', () => {
   
   it('can handle the FETCH_BARNS action', () => {
     const initialState = { loading: true, barns: [] };
-    const action = getBarns();
+    const action = {
+      type: FETCH_BARNS,
+      payload: [
+        { _id: '1234', type: 'pig', animals: ['pig', 'pig'] },
+        { id: '2345', type: 'cow', animals: ['cow', 'cow'] }
+      ]
+    };
     const newState = reducer(initialState, action);
     
     expect(newState).toEqual({ loading: false, barns: [
