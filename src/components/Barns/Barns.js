@@ -24,9 +24,6 @@ export default function Barns() {
     </section>
   ));
 
-  console.log(barnElements);
-  // if(barns.length === 0) barnElements = <p>Build a barn!</p>;
-
   return (
     <>
       {barnElements}

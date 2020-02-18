@@ -20,3 +20,9 @@ export const addBarnToState = barn => ({
   type: ADD_BARN,
   payload: barn
 });
+
+export const ADD_ANIMAL = 'ADD_ANIMAL';
+export const addAnimalToBarn = animal => ({
+  type: ADD_ANIMAL,
+  payload: animal
+});

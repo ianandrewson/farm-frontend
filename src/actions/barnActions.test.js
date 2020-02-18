@@ -1,4 +1,4 @@
-import { getBarns, FETCH_BARNS_LOADING, FETCH_BARNS, addBarnToState, ADD_BARN } from './barnActions';
+import { getBarns, FETCH_BARNS_LOADING, FETCH_BARNS, addBarnToState, ADD_BARN, addAnimalToBarn, ADD_ANIMAL } from './barnActions';
 
 jest.mock('../services/farmApi.js');
 
@@ -27,6 +27,14 @@ describe('barn action tests', () => {
     expect(action).toEqual({
       type: ADD_BARN,
       payload: 'testBarn'
+    });
+  });
+
+  it('creates an action to add an animal to a barn', () => {
+    const action = addAnimalToBarn('testChicken');
+    expect(action).toEqual({
+      type: ADD_ANIMAL,
+      payload: 'testChicken'
     });
   });
 });

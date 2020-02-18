@@ -1,27 +1,23 @@
 import React from 'react';
-import { newBarn } from '../../services/farmApi';
-import { useDispatch } from 'react-redux';
-import { 
-  FETCH_BARNS_LOADING, 
-  setBarnLoading, 
-  addBarnToState 
-} from '../../actions/barnActions';
+import { newBarn, newChicken } from '../../services/farmApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBarnLoading, addBarnToState } from '../../actions/barnActions';
+import { selectBarns } from '../../selectors/barnSelectors';
 
 export default function Controls() {
-
+  const barns = useSelector(selectBarns);
   const dispatch = useDispatch();
 
   const handleBuildBarn = ({ target }) => {
-    //post new barn
-    console.log(target);
     dispatch(setBarnLoading());
     return newBarn(target.value)
       .then(barn => dispatch(addBarnToState(barn)));
   };
 
-  const handleBuyChicken = () => {
-    //post new chicken to barn
-    return 
+  const handleBuyChicken = ({ target }) => {
+    const barnToFill = barns.find(barn => barn.barnType === target.value + 's');
+    return newChicken(barnToFill._id)
+      .then(chicken => dispatch(addChickenToState(chicken)));
   };
 
   const handleBuyCow = () => {
