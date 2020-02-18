@@ -1,20 +1,22 @@
 import React from 'react';
 import { newBarn } from '../../services/farmApi';
 import { useDispatch } from 'react-redux';
-import { FETCH_BARNS_LOADING, setBarnLoading } from '../../actions/barnActions';
+import { FETCH_BARNS_LOADING, setBarnLoading, addBarnToState } from '../../actions/barnActions';
 
 export default function Controls() {
 
   const dispatch = useDispatch();
 
-  const handleBuildChikenBarn = () => {
+  const handleBuildBarn = ({ target }) => {
     //post new barn
     dispatch(setBarnLoading());
-    newBarn('chicken');
+    return newBarn(target.value)
+      .then(barn => addBarnToState(barn));
   };
 
   const handleBuyChicken = () => {
     //post new chicken to barn
+    return 
   };
 
   const handleBuyCow = () => {
@@ -39,7 +41,9 @@ export default function Controls() {
 
   return (
     <>
-      <button onClick={handleBuildBarn}>Build a barn!</button>
+      <button value='chicken' onClick={handleBuildBarn}>Build a barn for chickens!</button>
+      <button value='cow' onClick={handleBuildBarn}>Build a barn for cows!</button>
+      <button value='pig' onClick={handleBuildBarn}>Build a barn for pigs!</button>
       <button onClick={handleBuyChicken}>Buy Chicken</button>
       <button onClick={handleBuyCow}>Buy Cow</button>
       <button onClick={handleBuyPig}>Buy Pig</button>
