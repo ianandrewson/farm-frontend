@@ -4,7 +4,7 @@ const request = (path, method, body) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    credentials: 'include',
+    // credentials: 'include',
     body: body && JSON.stringify(body)
   })
     .then(res => Promise.all([res.ok, res.json()]))

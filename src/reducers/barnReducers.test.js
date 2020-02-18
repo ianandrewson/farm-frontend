@@ -28,10 +28,10 @@ describe('barn reducer tests', () => {
   });
 
   it('can handle the ADD_BARN action', () => {
-    const initialState = { barns: [] };
+    const initialState = { barns: ['pig'] };
     const action = { type: ADD_BARN, payload: 'chicken' };
     const newState = reducer(initialState, action);
 
-    expect(newState).toEqual({ barns: ['chicken'], loading: false });
+    expect(newState).toEqual({ barns: ['pig', 'chicken'], loading: false });
   });
 });

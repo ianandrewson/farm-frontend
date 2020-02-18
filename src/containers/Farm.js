@@ -24,7 +24,9 @@ export default function Farm() {
 
   let barnElements = [];
   barnElements = barns.map(barn => (
-    <Barn key={barn._id} className={styles.barn}/>
+    <section key={barn._id} className={styles.barn}>
+      <Barn />
+    </section>
   ));
   if(barns.length === 0) barnElements = <p>Build a barn!</p>;
 
