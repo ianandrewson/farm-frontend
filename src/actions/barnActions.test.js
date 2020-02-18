@@ -1,4 +1,4 @@
-import { getBarns, FETCH_BARNS_LOADING, FETCH_BARNS } from './barnActions';
+import { getBarns, FETCH_BARNS_LOADING, FETCH_BARNS, addBarnToState, ADD_BARN } from './barnActions';
 
 jest.mock('../services/farmApi.js');
 
@@ -20,5 +20,13 @@ describe('barn action tests', () => {
           ]
         });
       });
+  });
+
+  it('creates an action to add a barn', () => {
+    const action = addBarnToState('testBarn');
+    expect(action).toEqual({
+      type: ADD_BARN,
+      payload: 'testBarn'
+    });
   });
 });

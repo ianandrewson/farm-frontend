@@ -10,3 +10,13 @@ export const getBarns = farmId => dispatch => {
       payload: barns
     }));
 };
+
+export const setBarnLoading = () => {
+  return { type: FETCH_BARNS_LOADING };
+};
+
+export const ADD_BARN = 'ADD_BARN';
+export const addBarnToState = barn => ({
+  type: ADD_BARN,
+  payload: barn
+});

@@ -1,4 +1,4 @@
-import { FETCH_BARNS_LOADING, FETCH_BARNS } from '../actions/barnActions';
+import { FETCH_BARNS_LOADING, FETCH_BARNS, ADD_BARN } from '../actions/barnActions';
 
 const initialState = {
   barns: [],
@@ -11,6 +11,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, loading: true };
     case FETCH_BARNS:
       return { ...state, loading: false, barns: action.payload };
+    case ADD_BARN:
+      return { ...state, loading: false, barns: [...state.barns, action.payload]};
     default:
       return state;
   }
