@@ -12,7 +12,6 @@ export default function reducer(state = initialState, action) {
     case FETCH_BARNS:
       return { ...state, loading: false, barns: action.payload };
     case ADD_BARN:
-      console.log(action.payload);
       return { ...state, loading: false, barns: [...state.barns, action.payload] };
     default:
       return state;

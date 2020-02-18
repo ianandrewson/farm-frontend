@@ -13,13 +13,10 @@ export default function Controls() {
 
   const handleBuildBarn = ({ target }) => {
     //post new barn
+    console.log(target);
     dispatch(setBarnLoading());
-    console.log(target.value);
     return newBarn(target.value)
-      .then(barn => {
-        console.log(barn);
-        dispatch(addBarnToState(barn));
-      });
+      .then(barn => dispatch(addBarnToState(barn)));
   };
 
   const handleBuyChicken = () => {
@@ -52,7 +49,7 @@ export default function Controls() {
       <button value='chickens' onClick={handleBuildBarn}>Build a barn for chickens!</button>
       <button value='cows' onClick={handleBuildBarn}>Build a barn for cows!</button>
       <button value='pigs' onClick={handleBuildBarn}>Build a barn for pigs!</button>
-      <button onClick={handleBuyChicken}>Buy Chicken</button>
+      <button onClick={handleBuyChicken} value='chicken'>Buy Chicken</button>
       <button onClick={handleBuyCow}>Buy Cow</button>
       <button onClick={handleBuyPig}>Buy Pig</button>
       <button onClick={handleSlaughterChicken}>Slaughter Chicken</button>
