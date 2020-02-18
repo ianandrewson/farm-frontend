@@ -1,4 +1,4 @@
-import { FETCH_BARNS_LOADING, FETCH_BARNS, ADD_BARN } from '../actions/barnActions';
+import { FETCH_BARNS_LOADING, FETCH_BARNS, ADD_BARN, addAnimalToBarn } from '../actions/barnActions';
 import reducer from './barnReducers';
 
 describe('barn reducer tests', () => {
@@ -33,5 +33,13 @@ describe('barn reducer tests', () => {
     const newState = reducer(initialState, action);
 
     expect(newState).toEqual({ barns: ['pig', 'chicken'], loading: false });
+  });
+
+  it('can handle the ADD_ANIMAL action', () => {
+    const initialState = { barn: { barnType: 'pig', animals: ['pig1', 'pig2'] } };
+    const action = addAnimalToBarn('pig3');
+    const newState = reducer(initialState, action);
+
+    expect(newState).toEqual({ barn: { barnType: 'pig', animals: ['pig1', 'pig2', 'pig3'] } });
   });
 });
