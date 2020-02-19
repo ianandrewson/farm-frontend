@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Barn({ animals }) {
 
@@ -6,8 +7,17 @@ export default function Barn({ animals }) {
 
   return (
     <>
-      {/* <p>A list of animals will go here</p> */}
       {animals.map(animal => animal.display)}
     </>
   );
 }
+
+Barn.propTypes = {
+  animals: PropTypes.arrayOf(PropTypes.shape({
+    barnId: PropTypes.string.isRequired,
+    species: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
+    maxAge: PropTypes.number.isRequired,
+    display: PropTypes.string.isRequired
+  })).isRequired
+};
