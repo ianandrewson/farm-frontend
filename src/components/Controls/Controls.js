@@ -15,9 +15,6 @@ export default function Controls() {
   };
 
   const findBarnIndex = (barnType, barns) => {
-    //find barn index of barnType and available space
-    console.log('barnType: ', barnType);
-    console.log('barns: ', barns);
     const barnIndex = barns.findIndex(barn => (
       barn.barnType === barnType &&
       barn.animals.length < barn.maxSize
@@ -31,25 +28,10 @@ export default function Controls() {
     pig: newPig
   };
 
-  // const actionFactory = {
-  //   chicken: addChickenToState,
-  //   pig: addPigToState,
-  //   cow: addCowToState
-  // }
-
   const handleBuyAnimal = ({ target }) => {
     const targetBarnIndex = findBarnIndex(target.value, barns);
-    console.log('targetBarnIndex: ', targetBarnIndex);
     return buyFactory[target.value](barns[targetBarnIndex]._id)
       .then(animal => dispatch(addAnimalToBarn(animal, targetBarnIndex)));
-  };
-
-  const handleBuyCow = () => {
-    //post new cow to barn
-  };
-
-  const handleBuyPig = () => {
-    //post new pig to barn
   };
 
   const handleSlaughterChicken = () => {

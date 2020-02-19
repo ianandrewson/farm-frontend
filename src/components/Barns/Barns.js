@@ -20,7 +20,7 @@ export default function Barns() {
 
   const barnElements = barns.map(barn => (
     <section key={barn._id} className={styles.barns}>
-      <Barn />
+      <Barn animals={barn.animals}/>
     </section>
   ));
 
