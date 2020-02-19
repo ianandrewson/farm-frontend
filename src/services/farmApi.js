@@ -39,7 +39,7 @@ const choosePigDisplay = () => {
 export const newBarn = (barnType) => {
   return request('/barns', 'post', {
     barnType,
-    maxSize: 50,
+    maxSize: barnSizes[barnType],
     animals: []
   });
 };
@@ -50,7 +50,6 @@ export const newChicken = barnId => {
     species: 'chicken',
     age: 0,
     maxAge: 5,
-    size: 1,
     display: chooseChickenDisplay()
   });
 };
@@ -61,7 +60,6 @@ export const newCow = barnId => {
     species: 'cow',
     age: 0,
     maxAge: 20,
-    size: 4,
     display: chooseCowDisplay()
   });
 };
@@ -72,7 +70,12 @@ export const newPig = barnId => {
     species: 'pig',
     age: 0,
     maxAge: 15,
-    size: 2,
     display: choosePigDisplay()
   });
+};
+
+const barnSizes = {
+  chicken: 50,
+  pig: 25,
+  cow: 12
 };

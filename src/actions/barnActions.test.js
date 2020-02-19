@@ -31,9 +31,10 @@ describe('barn action tests', () => {
   });
 
   it('creates an action to add an animal to a barn', () => {
-    const action = addAnimalToBarn('testChicken');
+    const action = addAnimalToBarn('testChicken', 3);
     expect(action).toEqual({
       type: ADD_ANIMAL,
+      index: 3,
       payload: 'testChicken'
     });
   });

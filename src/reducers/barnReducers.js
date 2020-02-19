@@ -13,9 +13,15 @@ export default function reducer(state = initialState, action) {
       return { ...state, loading: false, barns: action.payload };
     case ADD_BARN:
       return { ...state, loading: false, barns: [...state.barns, action.payload] };
-    //case ADD_ANIMAL:
-      //I don't know how to target a nested array via spreading
-      //return { ...state, loading: false, barns: [ ...state.barns, barn.animals: [...animals, action.payload]]}
+    case ADD_ANIMAL:
+      return { ...state, loading: false, barns:
+        state.barns.map((barn, i) => {
+          if(i === action.index){
+            barn.animals = [...barn.animals, action.payload];
+            return barn;
+          } else return barn;
+        }) 
+      };
     default:
       return state;
   }

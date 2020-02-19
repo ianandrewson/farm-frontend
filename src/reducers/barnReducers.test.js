@@ -36,10 +36,21 @@ describe('barn reducer tests', () => {
   });
 
   it('can handle the ADD_ANIMAL action', () => {
-    const initialState = { barn: { barnType: 'pig', animals: ['pig1', 'pig2'] } };
-    const action = addAnimalToBarn('pig3');
+    const initialState = { 
+      barns: [
+        { barnType: 'pig', animals: ['pig1', 'pig2'] },
+        { barnType: 'pig', animals: [] }
+      ]
+    };
+    const action = addAnimalToBarn('pig3', 1);
     const newState = reducer(initialState, action);
 
-    expect(newState).toEqual({ barn: { barnType: 'pig', animals: ['pig1', 'pig2', 'pig3'] } });
+    expect(newState).toEqual({ 
+      barns: [
+        { barnType: 'pig', animals: ['pig1', 'pig2'] },
+        { barnType: 'pig', animals: ['pig3'] }
+      ],
+      loading: false
+    });
   });
 });

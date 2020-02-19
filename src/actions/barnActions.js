@@ -22,7 +22,8 @@ export const addBarnToState = barn => ({
 });
 
 export const ADD_ANIMAL = 'ADD_ANIMAL';
-export const addAnimalToBarn = animal => ({
+export const addAnimalToBarn = (animal, index) => ({
   type: ADD_ANIMAL,
+  index,
   payload: animal
 });

@@ -1,7 +1,7 @@
 import React from 'react';
-import { newBarn, newChicken } from '../../services/farmApi';
+import { newBarn, newChicken, newCow, newPig } from '../../services/farmApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setBarnLoading, addBarnToState } from '../../actions/barnActions';
+import { setBarnLoading, addBarnToState, addAnimalToBarn } from '../../actions/barnActions';
 import { selectBarns } from '../../selectors/barnSelectors';
 
 export default function Controls() {
@@ -14,10 +14,34 @@ export default function Controls() {
       .then(barn => dispatch(addBarnToState(barn)));
   };
 
-  const handleBuyChicken = ({ target }) => {
-    const barnToFill = barns.find(barn => barn.barnType === target.value + 's');
-    return newChicken(barnToFill._id)
-      .then(chicken => dispatch(addChickenToState(chicken)));
+  const findBarnIndex = (barnType, barns) => {
+    //find barn index of barnType and available space
+    console.log('barnType: ', barnType);
+    console.log('barns: ', barns);
+    const barnIndex = barns.findIndex(barn => (
+      barn.barnType === barnType &&
+      barn.animals.length < barn.maxSize
+    ));
+    return barnIndex;
+  };
+
+  const buyFactory = {
+    chicken: newChicken,
+    cow: newCow,
+    pig: newPig
+  };
+
+  // const actionFactory = {
+  //   chicken: addChickenToState,
+  //   pig: addPigToState,
+  //   cow: addCowToState
+  // }
+
+  const handleBuyAnimal = ({ target }) => {
+    const targetBarnIndex = findBarnIndex(target.value, barns);
+    console.log('targetBarnIndex: ', targetBarnIndex);
+    return buyFactory[target.value](barns[targetBarnIndex]._id)
+      .then(animal => dispatch(addAnimalToBarn(animal, targetBarnIndex)));
   };
 
   const handleBuyCow = () => {
@@ -42,12 +66,12 @@ export default function Controls() {
 
   return (
     <>
-      <button value='chickens' onClick={handleBuildBarn}>Build a barn for chickens!</button>
-      <button value='cows' onClick={handleBuildBarn}>Build a barn for cows!</button>
-      <button value='pigs' onClick={handleBuildBarn}>Build a barn for pigs!</button>
-      <button onClick={handleBuyChicken} value='chicken'>Buy Chicken</button>
-      <button onClick={handleBuyCow}>Buy Cow</button>
-      <button onClick={handleBuyPig}>Buy Pig</button>
+      <button value='chicken' onClick={handleBuildBarn}>Build a barn for chickens!</button>
+      <button value='cow' onClick={handleBuildBarn}>Build a barn for cows!</button>
+      <button value='pig' onClick={handleBuildBarn}>Build a barn for pigs!</button>
+      <button onClick={handleBuyAnimal} value='chicken'>Buy Chicken</button>
+      <button onClick={handleBuyAnimal} value='cow'>Buy Cow</button>
+      <button onClick={handleBuyAnimal} value='pig'>Buy Pig</button>
       <button onClick={handleSlaughterChicken}>Slaughter Chicken</button>
       <button onClick={handleSlaughterCow}>Slaughter Cow</button>
       <button onClick={handleSlaughterPig}>Slaughter Pig</button>
